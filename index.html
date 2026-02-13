@@ -1,291 +1,136 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Confirmed - Tasheel VIP</title>
+    <title>Email Confirmed - Tasheel</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1a1f3a 0%, #2d3561 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
-        
         .container {
             background: white;
-            border-radius: 24px;
-            padding: 48px 32px;
+            border-radius: 20px;
+            padding: 40px;
             max-width: 500px;
-            width: 100%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.6s ease-out;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f4f6;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
         }
-        
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 24px;
-            border-radius: 24px;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        
-        div.logo {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .checkmark {
+        .icon {
             width: 80px;
             height: 80px;
-            margin: 0 auto 24px;
             background: #10b981;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: scaleIn 0.5s ease-out 0.3s both;
+            margin: 0 auto 20px;
         }
-        
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-        
-        .checkmark svg {
+        .checkmark {
             width: 40px;
             height: 40px;
-            stroke: white;
-            stroke-width: 3;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            stroke-dasharray: 50;
-            stroke-dashoffset: 50;
-            animation: draw 0.5s ease-out 0.5s forwards;
+            border: 4px solid white;
+            border-radius: 50%;
+            position: relative;
         }
-        
-        @keyframes draw {
-            to {
-                stroke-dashoffset: 0;
-            }
+        .checkmark:after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 3px;
+            width: 10px;
+            height: 18px;
+            border: solid white;
+            border-width: 0 4px 4px 0;
+            transform: rotate(45deg);
         }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-        
-        .app-name {
-            color: #3b82f6;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        
-        .message {
-            color: #6b7280;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-        
-        .features {
-            background: #f9fafb;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 32px;
-            text-align: left;
-        }
-        
-        .features h3 {
-            color: #1a1a2e;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            color: #4b5563;
-            font-size: 14px;
-        }
-        
-        .feature-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .feature-icon {
-            width: 32px;
-            height: 32px;
-            background: #3b82f6;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .cta-button {
+        h1 { color: #1a1a2e; font-size: 28px; margin-bottom: 10px; }
+        p { color: #6b7280; font-size: 16px; line-height: 1.6; margin-bottom: 30px; }
+        .button {
             display: inline-block;
             background: #1a1a2e;
             color: white;
-            padding: 16px 32px;
+            padding: 15px 40px;
             border-radius: 12px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 16px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
         }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(26, 26, 46, 0.4);
-        }
-        
-        .footer {
-            margin-top: 24px;
-            color: #9ca3af;
-            font-size: 13px;
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 32px 24px;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-            
-            .app-name {
-                font-size: 20px;
-            }
-        }
+        #loading { display: block; }
+        #success { display: none; }
+        #error { display: none; }
     </style>
-    <script>
-        // Handle email confirmation
-        window.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const hash = window.location.hash;
-            
-            // Check if this is a confirmation callback
-            if (hash && (hash.includes('access_token') || hash.includes('type=signup'))) {
-                // Show success message
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('success').style.display = 'block';
-            } else if (urlParams.get('token') || urlParams.get('type') === 'signup') {
-                // Show success message
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('success').style.display = 'block';
-            } else {
-                // Show success by default
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('success').style.display = 'block';
-            }
-        });
-    </script>
 </head>
 <body>
-    <!-- Loading State -->
-    <div id="loading" class="container" style="display: block;">
-        <div style="width: 60px; height: 60px; border: 4px solid #f3f4f6; border-top: 4px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 24px;"></div>
-        <h1>Activating Your Account...</h1>
-        <p class="message">Please wait while we confirm your email.</p>
-    </div>
-    
-    <!-- Success State -->
-    <div id="success" class="container" style="display: none;">
-        <img src="https://raw.githubusercontent.com/germa66pro-art/tasheel-email-confirmation/main/icon.png" alt="Tasheel VIP" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="logo" style="display: none;">T</div>
-        
-        <div class="checkmark">
-            <svg viewBox="0 0 52 52">
-                <polyline points="14 27 22 35 38 19"/>
-            </svg>
+    <div class="container">
+        <div id="loading">
+            <div class="loader"></div>
+            <h1>Activating Your Account...</h1>
+            <p>Please wait while we confirm your email.</p>
         </div>
-        
-        <h1>Thank You! Account Successfully Activated</h1>
-        <p class="app-name">Tasheel VIP</p>
-        
-        <p class="message">
-            Thank you for choosing our app! Your email has been verified. 
-            You can now close this page and log in to enjoy all the features.
-        </p>
-        
-        <div class="features">
-            <h3>✨ What You Can Do Now</h3>
-            <div class="feature-item">
-                <div class="feature-icon">🔍</div>
-                <span>Find skilled craftsmen in your area</span>
+
+        <div id="success">
+            <div class="icon">
+                <div class="checkmark"></div>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon">⭐</div>
-                <span>Rate and review craftsmen</span>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">💬</div>
-                <span>Chat directly with professionals</span>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">❤️</div>
-                <span>Save your favorite craftsmen</span>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">🌍</div>
-                <span>Multi-language support (AR, EN, FR)</span>
-            </div>
+            <h1>Email Confirmed!</h1>
+            <p>Your email has been successfully verified. You can now login to your Tasheel account and start using the app.</p>
+            <a href="tasheel-vip://" class="button">Open Tasheel App</a>
+            <p style="margin-top: 20px; font-size: 14px;">If the app doesn't open automatically, please open it manually and login.</p>
         </div>
-        
-        <a href="#" class="cta-button" onclick="window.close(); return false;">Close This Page</a>
-        
-        <p class="footer">
-            You can safely close this window and return to the app
-        </p>
+
+        <div id="error">
+            <h1>Verification Failed</h1>
+            <p>Unable to verify your email. Please try again or contact support.</p>
+            <a href="tasheel-vip://" class="button">Open Tasheel App</a>
+        </div>
     </div>
-    
-    <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const hash = new URLSearchParams(window.location.hash.substring(1));
+        
+        const token = params.get('token') || params.get('token_hash') || hash.get('access_token');
+        const type = params.get('type') || 'signup';
+
+        if (token) {
+            fetch(`https://crwjgdyjywbudbksregb.supabase.co/auth/v1/verify?token=${token}&type=${type}`)
+                .then(res => {
+                    document.getElementById('loading').style.display = 'none';
+                    if (res.ok || res.redirected) {
+                        document.getElementById('success').style.display = 'block';
+                    } else {
+                        document.getElementById('error').style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('error').style.display = 'block';
+                });
+        } else {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('success').style.display = 'block';
         }
-    </style>
+    </script>
 </body>
 </html>
