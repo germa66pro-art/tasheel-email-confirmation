@@ -29,12 +29,7 @@
         text-align: center;
         box-shadow: 0 15px 50px rgba(0,0,0,0.5);
         position: relative;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .container:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+        animation: fadeIn 0.8s ease forwards;
     }
 
     h1 {
@@ -48,21 +43,6 @@
         font-size: 16px;
         line-height: 1.6;
         margin-bottom: 20px;
-    }
-
-    .loader {
-        width: 60px;
-        height: 60px;
-        border: 6px solid #1a1a2e;
-        border-top: 6px solid #00b0ff;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin: 0 auto 20px;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
     }
 
     .icon {
@@ -102,6 +82,11 @@
         to { transform: scale(1); }
     }
 
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Responsive */
     @media(max-width: 600px){
         .container { padding: 30px 20px; }
@@ -114,55 +99,11 @@
 </head>
 <body>
 <div class="container">
-    <!-- Loading State -->
-    <div id="loading">
-        <div class="loader"></div>
-        <h1>Activating Your Account...</h1>
-        <p>Please wait while we confirm your email.</p>
+    <div class="icon">
+        <div class="checkmark"></div>
     </div>
-
-    <!-- Success State -->
-    <div id="success">
-        <div class="icon">
-            <div class="checkmark"></div>
-        </div>
-        <h1>Email Confirmed!</h1>
-        <p>يمكنك غلق هذه الصفحة والذهاب للتطبيق وتسجيل الدخول والاستمتاع بكل مزايا التطبيق.</p>
-    </div>
-
-    <!-- Error State -->
-    <div id="error">
-        <h1>Verification Failed</h1>
-        <p>Unable to verify your email. Please try again or contact support.</p>
-    </div>
+    <h1>Email Confirmed!</h1>
+    <p>يمكنك غلق هذه الصفحة والذهاب للتطبيق وتسجيل الدخول والاستمتاع بكل مزايا التطبيق.</p>
 </div>
-
-<script>
-const params = new URLSearchParams(window.location.search);
-const hash = new URLSearchParams(window.location.hash.substring(1));
-const token = params.get('token') || params.get('token_hash') || hash.get('access_token');
-const type = params.get('type') || 'signup';
-
-document.getElementById('loading').style.display = 'block';
-
-if (token) {
-    fetch(`https://crwjgdyjywbudbksregb.supabase.co/auth/v1/verify?token=${token}&type=${type}`)
-        .then(res => {
-            document.getElementById('loading').style.display = 'none';
-            if (res.ok || res.redirected) {
-                document.getElementById('success').style.display = 'block';
-            } else {
-                document.getElementById('error').style.display = 'block';
-            }
-        })
-        .catch(() => {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('error').style.display = 'block';
-        });
-} else {
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('success').style.display = 'block';
-}
-</script>
 </body>
 </html>
