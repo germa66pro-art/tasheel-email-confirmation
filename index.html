@@ -1,136 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Confirmed - Tasheel</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f4f6;
-            border-top: 5px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .icon {
-            width: 80px;
-            height: 80px;
-            background: #10b981;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-        .checkmark {
-            width: 40px;
-            height: 40px;
-            border: 4px solid white;
-            border-radius: 50%;
-            position: relative;
-        }
-        .checkmark:after {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 3px;
-            width: 10px;
-            height: 18px;
-            border: solid white;
-            border-width: 0 4px 4px 0;
-            transform: rotate(45deg);
-        }
-        h1 { color: #1a1a2e; font-size: 28px; margin-bottom: 10px; }
-        p { color: #6b7280; font-size: 16px; line-height: 1.6; margin-bottom: 30px; }
-        .button {
-            display: inline-block;
-            background: #1a1a2e;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-        }
-        #loading { display: block; }
-        #success { display: none; }
-        #error { display: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Confirmed - Tasheel</title>
+<style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Body & Container */
+    body {
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        color: #fff;
+    }
+
+    .container {
+        background: #0d1117;
+        border-radius: 20px;
+        padding: 40px 30px;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    }
+
+    h1 {
+        color: #00b0ff;
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    p {
+        color: #cfd8dc;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .loader {
+        width: 60px;
+        height: 60px;
+        border: 6px solid #1a1a2e;
+        border-top: 6px solid #00b0ff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .icon {
+        width: 100px;
+        height: 100px;
+        background: #00b0ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        transform: scale(0);
+        animation: pop 0.5s forwards 0.3s;
+    }
+
+    .checkmark {
+        width: 50px;
+        height: 50px;
+        border: 5px solid white;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .checkmark:after {
+        content: '';
+        position: absolute;
+        left: 14px;
+        top: 6px;
+        width: 15px;
+        height: 28px;
+        border: solid white;
+        border-width: 0 5px 5px 0;
+        transform: rotate(45deg);
+    }
+
+    @keyframes pop {
+        to { transform: scale(1); }
+    }
+
+    /* Responsive */
+    @media(max-width: 600px){
+        .container { padding: 30px 20px; }
+        h1 { font-size: 28px; }
+        p { font-size: 15px; }
+        .icon { width: 80px; height: 80px; }
+        .checkmark { width: 40px; height: 40px; }
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div id="loading">
-            <div class="loader"></div>
-            <h1>Activating Your Account...</h1>
-            <p>Please wait while we confirm your email.</p>
-        </div>
-
-        <div id="success">
-            <div class="icon">
-                <div class="checkmark"></div>
-            </div>
-            <h1>Email Confirmed!</h1>
-            <p>Your email has been successfully verified. You can now login to your Tasheel account and start using the app.</p>
-            <a href="tasheel-vip://" class="button">Open Tasheel App</a>
-            <p style="margin-top: 20px; font-size: 14px;">If the app doesn't open automatically, please open it manually and login.</p>
-        </div>
-
-        <div id="error">
-            <h1>Verification Failed</h1>
-            <p>Unable to verify your email. Please try again or contact support.</p>
-            <a href="tasheel-vip://" class="button">Open Tasheel App</a>
-        </div>
+<div class="container">
+    <!-- Loading State -->
+    <div id="loading">
+        <div class="loader"></div>
+        <h1>Activating Your Account...</h1>
+        <p>Please wait while we confirm your email.</p>
     </div>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const hash = new URLSearchParams(window.location.hash.substring(1));
-        
-        const token = params.get('token') || params.get('token_hash') || hash.get('access_token');
-        const type = params.get('type') || 'signup';
+    <!-- Success State -->
+    <div id="success">
+        <div class="icon">
+            <div class="checkmark"></div>
+        </div>
+        <h1>Email Confirmed!</h1>
+        <p>يمكنك غلق هذه الصفحة والذهاب للتطبيق وتسجيل الدخول والاستمتاع بكل مزايا التطبيق.</p>
+    </div>
 
-        if (token) {
-            fetch(`https://crwjgdyjywbudbksregb.supabase.co/auth/v1/verify?token=${token}&type=${type}`)
-                .then(res => {
-                    document.getElementById('loading').style.display = 'none';
-                    if (res.ok || res.redirected) {
-                        document.getElementById('success').style.display = 'block';
-                    } else {
-                        document.getElementById('error').style.display = 'block';
-                    }
-                })
-                .catch(() => {
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('error').style.display = 'block';
-                });
-        } else {
+    <!-- Error State -->
+    <div id="error">
+        <h1>Verification Failed</h1>
+        <p>Unable to verify your email. Please try again or contact support.</p>
+    </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const hash = new URLSearchParams(window.location.hash.substring(1));
+const token = params.get('token') || params.get('token_hash') || hash.get('access_token');
+const type = params.get('type') || 'signup';
+
+document.getElementById('loading').style.display = 'block';
+
+if (token) {
+    fetch(`https://crwjgdyjywbudbksregb.supabase.co/auth/v1/verify?token=${token}&type=${type}`)
+        .then(res => {
             document.getElementById('loading').style.display = 'none';
-            document.getElementById('success').style.display = 'block';
-        }
-    </script>
+            if (res.ok || res.redirected) {
+                document.getElementById('success').style.display = 'block';
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        })
+        .catch(() => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+        });
+} else {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+}
+</script>
 </body>
 </html>
